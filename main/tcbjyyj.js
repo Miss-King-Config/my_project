@@ -8,7 +8,7 @@ const axios = require('axios');
 const qs = require('qs');
 const delay = ms => new Promise((resolve, reject) => setTimeout(resolve, ms));
 
-console.log('需要新建环境变量 Tcbjyyj_openid\n填写抓包openid\n多用户可以用# @ \\n 隔开');
+console.log('需要新建环境变量: Tcbjyyj_openid\n填写抓包openid\n多用户可以用# @ \\n 隔开');
 var appUrlArr = [];
 var openid = "";
 var Tcbjyyj_openid = "";
@@ -33,13 +33,13 @@ async function checkEnv() {
     }
     if (Tcbjyyj_openid.indexOf('#') != -1) {
         appUrlArrs = Tcbjyyj_openid.split('#');
-        console.log('您选择的是用"#"隔开Tcbjyyj_openid\n');
+        console.log('您选择的是用"#"隔开: Tcbjyyj_openid\n');
     } else if (Tcbjyyj_openid.indexOf('\n') != -1) {
         appUrlArrs = Tcbjyyj_openid.split('\n');
-        console.log('您选择的是用"\\n"隔开Tcbjyyj_openid\n');
+        console.log('您选择的是用"\\n"隔开: Tcbjyyj_openid\n');
     } else if (Tcbjyyj_openid.indexOf('@') != -1) {
         appUrlArrs = Tcbjyyj_openid.split('@');
-        console.log('您选择的是用"@"隔开Tcbjyyj_openid\n');
+        console.log('您选择的是用"@"隔开: Tcbjyyj_openid\n');
     } else {
         appUrlArrs = [Tcbjyyj_openid];
     }
@@ -60,7 +60,7 @@ async function getEnvParam(userNum) {
 
 async function initAccountInfo() {
     for (numUser = 0; numUser < totalUser; numUser++) {
-        console.log('用户' + (numUser + 1) + '开始执行');
+        console.log('\n用户' + (numUser + 1) + '开始执行\n');
         await getEnvParam(numUser);
         await sign_saveSign();
         await delay(2000); //等待2秒
