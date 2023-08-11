@@ -49,7 +49,7 @@ async function checkEnv() {
         }
     });
     totalUser = appUrlArr.length;
-    console.log('共找到' + totalUser + '个用户\n');
+    console.log('共找到' + totalUser + '个用户');
     return true;
 }
 
@@ -59,8 +59,8 @@ async function getEnvParam(userNum) {
 }
 
 async function initAccountInfo() {
-    for (numUser = 0; numUser < totalUser; numUser++) {
-        console.log('\n用户' + (numUser + 1) + '开始执行\n');
+    for (let numUser = 0; numUser < totalUser; numUser++) {
+        console.log('\n用户' + (numUser + 1) + '开始执行');
         await getEnvParam(numUser);
         await sign_saveSign();
         await delay(2000); //等待2秒
