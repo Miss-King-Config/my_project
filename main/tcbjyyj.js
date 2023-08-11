@@ -25,7 +25,7 @@ var Tcbjyyj_openid = "";
 })().catch((e) => console.error(e));
 
 async function checkEnv() {
-    const Tcbjyyj_openid = ($.isNode() ? (process.env.Tcbjyyj_openid) : ($.getval('Tcbjyyj_openid'))) || "";
+    const Tcbjyyj_openid = process.env.Tcbjyyj_openid || "";
     if (!Tcbjyyj_openid) {
         let str = Tcbjyyj_openid ? "" : "Tcbjyyj_openid";
         console.log('未找到环境变量: ' + str + '\n');
