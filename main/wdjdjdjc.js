@@ -23,7 +23,6 @@ $.log(`需要新建环境变量: Wdjdjdjc_Cookie\n填写抓包Cookie\n多用户�
 
 var appUrlArr = [];
 var Cookie = '';
-var Wdjdjdjc_Cookie = "";
 
 !(async () => {
     //检查环境变量
