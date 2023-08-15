@@ -182,6 +182,7 @@ async function getUserRewardGoldConisTask() {
             try {
                 if (err) {
                     $.log(`打开天天任务列表Api请求失败`);
+                    await $.wait(5000);
                     await getUserRewardGoldConisTask();
                 } else {
                     let html = JSON.parse(data);
