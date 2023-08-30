@@ -5,17 +5,17 @@
 ============Quantumultx===============
 [task_local]
 #点亮城市｜与加多宝一起喝彩
-00 00 5,6 * * * , tag=点亮城市｜与加多宝一起喝彩, img-url=, enabled=true
+00 00 5,6,7 * * * , tag=点亮城市｜与加多宝一起喝彩, img-url=, enabled=true
 
 ================Loon==============
 [Script]
-cron "00 00 5,6 * * *" script-path=,tag=点亮城市｜与加多宝一起喝彩
+cron "00 00 5,6,7 * * *" script-path=,tag=点亮城市｜与加多宝一起喝彩
 
 ===============Surge=================
-点亮城市｜与加多宝一起喝彩 = type=cron,cronexp="00 00 5,6 * * *",wake-system=1,timeout=33600,script-path=
+点亮城市｜与加多宝一起喝彩 = type=cron,cronexp="00 00 5,6,7 * * *",wake-system=1,timeout=33600,script-path=
 
 ============小火箭=========
-点亮城市｜与加多宝一起喝彩 = type=cron,script-path=, cronexpr="00 00 5,6 * * *", timeout=33600, enable=true
+点亮城市｜与加多宝一起喝彩 = type=cron,script-path=, cronexpr="00 00 5,6,7 * * *", timeout=33600, enable=true
 */
 
 const $ = new Env('点亮城市｜与加多宝一起喝彩');
@@ -73,19 +73,29 @@ async function initAccountInfo() {
     for (numUser = 0; numUser < totalUser; numUser++) {
         $.log(`\n用户` + (numUser + 1) + `开始执行`);
         await getEnvParam(numUser);
+        for (let k in appUrlArr) {
+            let save_token = appUrlArr[k];
+            if (save_token != `${token}`) {
+                for (let m = 0; m < 2; m++) {
+                    for (let l = 1; l < 5; l++) {
+                        await save(save_token, l);
+                        await $.wait(5000); //等待5秒
+                    }
+                }
+            }
+        }
         await drop();
         await $.wait(5000); //等待5秒
         for (let i = 1; i < 4; i++) {
             let game_name = "";
             i == 1 ? game_name = "麻辣消消乐" : i == 2 ? game_name = "极限冲击" : i == 3 ? game_name = "我要去杭州" : "";
-            for (let j = 0; j < 3; j++) {
+            for (let j = 0; j < 5; j++) {
                 $.log(`${game_name} 第${(j+1)}次 开始`);
                 await game(i);
                 await $.wait(5000); //等待5秒
                 $.log(`${game_name} 第${(j+1)}次 结束`);
             }
         }
-        await $.wait(5000); //等待5秒
         await accumulate();
     }
 }
@@ -103,6 +113,43 @@ function object2query3(t) {
     var c = [];
     for (var d in a) c.push(a[d] + "=" + t[a[d]]);
     return c.join("");
+}
+
+//助力
+async function save(save_token, save_category) {
+    let temporary = (new Date).getTime() + "";
+    return new Promise((resolve) => {
+        let url = {
+            url: `https://wb.onlineweixin.com/jdbcms/assistance/save`,
+            body: JSON.stringify({
+                "token": `${save_token}`,
+                "category": `${save_category}`,
+                "temporary": `${temporary}`
+            }),
+            headers: {
+                "Content-Type": "application/json;charset=UTF-8",
+                "token": `${token}`
+            }
+        };
+        $.post(url, async (err, resp, data) => {
+            try {
+                if (err) {
+                    $.log(`助力Api请求失败`);
+                } else {
+                    let html = JSON.parse(data);
+                    if (html.code == 2000) {
+                        $.log(`助力 ` + html.desc);
+                    } else {
+                        $.log(`助力 ` + html.desc);
+                    }
+                }
+            } catch (e) {
+                $.logErr(e, resp);
+            } finally {
+                resolve();
+            }
+        });
+    });
 }
 
 //查询点亮值
@@ -124,7 +171,7 @@ async function accumulate() {
                         let total = html.data.total;
                         $.log(`查询点亮值 剩余${total}`);
                     } else {
-                        $.log(`查询点亮值` + html.desc);
+                        $.log(`查询点亮值 ` + html.desc);
                     }
                 }
             } catch (e) {
@@ -159,8 +206,10 @@ async function drop() {
                     if (html.code == 2000) {
                         let integralB = html.data.integralB;
                         $.log(`点亮城市 获得${integralB}点亮值`);
+                        await $.wait(5000); //等待5秒
+                        await drop();
                     } else {
-                        $.log(`点亮城市` + html.desc);
+                        $.log(`点亮城市 ` + html.desc);
                     }
                 }
             } catch (e) {
@@ -201,7 +250,7 @@ async function game(game_state) {
                             $.log(`游戏次数不足`);
                         }
                     } else {
-                        $.log(`开始游戏` + html.desc);
+                        $.log(`开始游戏 ` + html.desc);
                     }
                 }
             } catch (e) {
@@ -302,7 +351,7 @@ async function effect(game_state) {
                         let integralB = html.data.integralB;
                         $.log(`结束游戏 获得${integralB}点亮值`);
                     } else {
-                        $.log(`结束游戏` + html.desc);
+                        $.log(`结束游戏 ` + html.desc);
                     }
                 }
             } catch (e) {
