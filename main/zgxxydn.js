@@ -1,3 +1,4 @@
+
 /*
 这个修仙有点难app
 
@@ -218,7 +219,8 @@ async function getHdUrl() {
             url: `https://sdk.sh9130.com/hd/?ct=TuiRedPack&ac=getHdUrl`,
             body: object2str(TuiRedPack),
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                'Cookie': ''
             }
         };
         $.post(url, async (err, resp, data) => {
@@ -249,7 +251,10 @@ async function getHdUrl() {
 async function getInfo2() {
     return new Promise((resolve) => {
         let url = {
-            url: `https://xmr.shqnon.com/hd/?ac=getInfo2&config_id=${config_id}&ct=TuiRedPack&game_id=331&game_pkg=yjsydlw_pxzgxxydn_CK&hd_id=74&partner_id=1&role_id=${role_id}&sdk_token=${sdk_token}&sign=${sign}&uid=${user_id}&username=${username}`
+            url: `https://xmr.shqnon.com/hd/?ac=getInfo2&config_id=${config_id}&ct=TuiRedPack&game_id=331&game_pkg=yjsydlw_pxzgxxydn_CK&hd_id=74&partner_id=1&role_id=${role_id}&sdk_token=${sdk_token}&sign=${sign}&uid=${user_id}&username=${username}`,
+            headers: {
+                'Cookie': ''
+            }
         };
         $.get(url, async (err, resp, data) => {
             try {
@@ -287,7 +292,10 @@ async function getInfo2() {
 async function bindEntrance() {
     return new Promise((resolve) => {
         let url = {
-            url: `https://sdk.sh9130.com/hd/?ct=TuiRedPack&ac=bindEntrance&openid=${openid}`
+            url: `https://sdk.sh9130.com/hd/?ct=TuiRedPack&ac=bindEntrance&openid=${openid}`,
+            headers: {
+                'Cookie': ''
+            }
         };
         $.get(url, async (err, resp, data) => {
             try {
@@ -319,7 +327,10 @@ async function bindEntrance() {
 async function resetWxname(uidx) {
     return new Promise((resolve) => {
         let url = {
-            url: `https://sdk.sh9130.com/hd/?ct=TuiRedPack&ac=resetWxname&uid=${uidx}&open_id=${openid}`
+            url: `https://sdk.sh9130.com/hd/?ct=TuiRedPack&ac=resetWxname&uid=${uidx}&open_id=${openid}`,
+            headers: {
+                'Cookie': ''
+            }
         };
         $.get(url, async (err, resp, data) => {
             try {
@@ -346,7 +357,10 @@ async function resetWxname(uidx) {
 async function userBindThePulic() {
     return new Promise((resolve) => {
         let url = {
-            url: `https://sdk.sh9130.com/hd/?ct=tuiRedPack&ac=userBindThePulic&open_id=${openid}&bind_code=${bind_code}`
+            url: `https://sdk.sh9130.com/hd/?ct=tuiRedPack&ac=userBindThePulic&open_id=${openid}&bind_code=${bind_code}`,
+            headers: {
+                'Cookie': ''
+            }
         };
         $.get(url, async (err, resp, data) => {
             try {
@@ -373,7 +387,10 @@ async function userBindThePulic() {
 async function getEntry() {
     return new Promise((resolve) => {
         let url = {
-            url: `https://xmr.shqnon.com/hd/?ct=TuiRedInteract&ac=getEntry&game_id=331&game_pkg=yjsydlw_pxzgxxydn_CK&role_id=${role_id}&uid=${user_id}&config_id=${config_id}&partner_id=1&sign=${sign}&sdk_token=${sdk_token}&username=${username}&hd_id=74&ad_code=pxzgxxydn_11194_63733_2477_222_1436954_ad`
+            url: `https://xmr.shqnon.com/hd/?ct=TuiRedInteract&ac=getEntry&game_id=331&game_pkg=yjsydlw_pxzgxxydn_CK&role_id=${role_id}&uid=${user_id}&config_id=${config_id}&partner_id=1&sign=${sign}&sdk_token=${sdk_token}&username=${username}&hd_id=74&ad_code=pxzgxxydn_11194_63733_2477_222_1436954_ad`,
+            headers: {
+                'Cookie': ''
+            }
         };
         $.get(url, async (err, resp, data) => {
             try {
@@ -402,7 +419,10 @@ async function getEntry() {
 async function getIndex() {
     return new Promise((resolve) => {
         let url = {
-            url: `https://xmr.shqnon.com/hd/?ct=TuiRedInteract&ac=getIndex&game_id=331&game_pkg=yjsydlw_pxzgxxydn_CK&role_id=${role_id}&uid=${user_id}&config_id=${config_id}&sign=${sign}`
+            url: `https://xmr.shqnon.com/hd/?ct=TuiRedInteract&ac=getIndex&game_id=331&game_pkg=yjsydlw_pxzgxxydn_CK&role_id=${role_id}&uid=${user_id}&config_id=${config_id}&sign=${sign}`,
+            headers: {
+                'Cookie': ''
+            }
         };
         $.get(url, async (err, resp, data) => {
             try {
@@ -437,7 +457,10 @@ async function getIndex() {
 async function receiveRed(id) {
     return new Promise((resolve) => {
         let url = {
-            url: `https://xmr.shqnon.com/hd/?ct=TuiRedInteract&ac=receiveRed&game_id=331&game_pkg=yjsydlw_pxzgxxydn_CK&role_id=${role_id}&uid=${user_id}&config_id=${config_id}&sign=${sign}&red_id=${id}&role_name=${encodeURIComponent(role_name)}&word_desc=${word_desc}`
+            url: `https://xmr.shqnon.com/hd/?ct=TuiRedInteract&ac=receiveRed&game_id=331&game_pkg=yjsydlw_pxzgxxydn_CK&role_id=${role_id}&uid=${user_id}&config_id=${config_id}&sign=${sign}&red_id=${id}&role_name=${encodeURIComponent(role_name)}&word_desc=${word_desc}`,
+            headers: {
+                'Cookie': ''
+            }
         };
         $.get(url, async (err, resp, data) => {
             try {
@@ -446,7 +469,7 @@ async function receiveRed(id) {
                 } else {
                     let data2 = JSON.parse(data);
                     if (data2.state == 1) {
-                        $.log(`receiveRed ` + JSON.stringify(data2));
+                        $.log(`receiveRed ` + data2.data.red_money + "元");
                         receiveRed_int = true;
                     } else {
                         $.log(`receiveRed ` + data2.msg);
