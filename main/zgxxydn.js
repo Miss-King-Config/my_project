@@ -1,4 +1,3 @@
-
 /*
 这个修仙有点难app
 
@@ -6,17 +5,17 @@
 ============Quantumultx===============
 [task_local]
 #这个修仙有点难
-00 00 19,20,21,22,23 * * * , tag=这个修仙有点难, img-url=, enabled=true
+00 00 19,20,21,22,23,00 * * * , tag=这个修仙有点难, img-url=, enabled=true
 
 ================Loon==============
 [Script]
-cron "00 00 19,20,21,22,23 * * *" script-path=,tag=这个修仙有点难
+cron "00 00 19,20,21,22,23,00 * * *" script-path=,tag=这个修仙有点难
 
 ===============Surge=================
-这个修仙有点难 = type=cron,cronexp="00 00 19,20,21,22,23 * * *",wake-system=1,timeout=33600,script-path=
+这个修仙有点难 = type=cron,cronexp="00 00 19,20,21,22,23,00 * * *",wake-system=1,timeout=33600,script-path=
 
 ============小火箭=========
-这个修仙有点难 = type=cron,script-path=, cronexpr="00 00 19,20,21,22,23 * * *", timeout=33600, enable=true
+这个修仙有点难 = type=cron,script-path=, cronexpr="00 00 19,20,21,22,23,00 * * *", timeout=33600, enable=true
 */
 
 const $ = new Env('这个修仙有点难');
@@ -26,7 +25,7 @@ var appUrlArr = [];
 const md5key = "HGJL8-EDH5F-WS1JP-TFGJI";
 var username = '';
 var password = '';
-var role_id = '';
+var role_id = '345341140402400';
 var uuid = '';
 var user_id = '';
 var sdk_token = '';
@@ -90,7 +89,7 @@ async function getEnvParam(userNum) {
         appUrlArrVal = appUrlArrVal.split("----");
         username = appUrlArrVal[0];
         password = appUrlArrVal[1];
-        role_id = appUrlArrVal[2];
+        //role_id = appUrlArrVal[2];
     }
 }
 
@@ -163,7 +162,8 @@ async function user_login() {
             url: `https://sdk.sh9130.com/?method=user.login`,
             body: object2str(user_login_data),
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                'cookie': ''
             }
         };
         $.post(url, async (err, resp, data) => {
@@ -220,7 +220,7 @@ async function getHdUrl() {
             body: object2str(TuiRedPack),
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-                'Cookie': ''
+                'cookie': ''
             }
         };
         $.post(url, async (err, resp, data) => {
@@ -253,7 +253,7 @@ async function getInfo2() {
         let url = {
             url: `https://xmr.shqnon.com/hd/?ac=getInfo2&config_id=${config_id}&ct=TuiRedPack&game_id=331&game_pkg=yjsydlw_pxzgxxydn_CK&hd_id=74&partner_id=1&role_id=${role_id}&sdk_token=${sdk_token}&sign=${sign}&uid=${user_id}&username=${username}`,
             headers: {
-                'Cookie': ''
+                'cookie': ''
             }
         };
         $.get(url, async (err, resp, data) => {
@@ -294,7 +294,7 @@ async function bindEntrance() {
         let url = {
             url: `https://sdk.sh9130.com/hd/?ct=TuiRedPack&ac=bindEntrance&openid=${openid}`,
             headers: {
-                'Cookie': ''
+                'cookie': ''
             }
         };
         $.get(url, async (err, resp, data) => {
@@ -329,7 +329,7 @@ async function resetWxname(uidx) {
         let url = {
             url: `https://sdk.sh9130.com/hd/?ct=TuiRedPack&ac=resetWxname&uid=${uidx}&open_id=${openid}`,
             headers: {
-                'Cookie': ''
+                'cookie': ''
             }
         };
         $.get(url, async (err, resp, data) => {
@@ -359,7 +359,7 @@ async function userBindThePulic() {
         let url = {
             url: `https://sdk.sh9130.com/hd/?ct=tuiRedPack&ac=userBindThePulic&open_id=${openid}&bind_code=${bind_code}`,
             headers: {
-                'Cookie': ''
+                'cookie': ''
             }
         };
         $.get(url, async (err, resp, data) => {
@@ -389,7 +389,7 @@ async function getEntry() {
         let url = {
             url: `https://xmr.shqnon.com/hd/?ct=TuiRedInteract&ac=getEntry&game_id=331&game_pkg=yjsydlw_pxzgxxydn_CK&role_id=${role_id}&uid=${user_id}&config_id=${config_id}&partner_id=1&sign=${sign}&sdk_token=${sdk_token}&username=${username}&hd_id=74&ad_code=pxzgxxydn_11194_63733_2477_222_1436954_ad`,
             headers: {
-                'Cookie': ''
+                'cookie': ''
             }
         };
         $.get(url, async (err, resp, data) => {
@@ -421,7 +421,7 @@ async function getIndex() {
         let url = {
             url: `https://xmr.shqnon.com/hd/?ct=TuiRedInteract&ac=getIndex&game_id=331&game_pkg=yjsydlw_pxzgxxydn_CK&role_id=${role_id}&uid=${user_id}&config_id=${config_id}&sign=${sign}`,
             headers: {
-                'Cookie': ''
+                'cookie': ''
             }
         };
         $.get(url, async (err, resp, data) => {
@@ -432,6 +432,7 @@ async function getIndex() {
                     let data2 = JSON.parse(data);
                     if (data2.state == 1) {
                         let left_money = data2.data.left_money;
+                        $.log(`getIndex 现有余额` + left_money + "元");
                         let red_data = data2.data.red_data;
                         for (let red_data_i in red_data) {
                             let status = red_data[red_data_i].status;
@@ -459,7 +460,7 @@ async function receiveRed(id) {
         let url = {
             url: `https://xmr.shqnon.com/hd/?ct=TuiRedInteract&ac=receiveRed&game_id=331&game_pkg=yjsydlw_pxzgxxydn_CK&role_id=${role_id}&uid=${user_id}&config_id=${config_id}&sign=${sign}&red_id=${id}&role_name=${encodeURIComponent(role_name)}&word_desc=${word_desc}`,
             headers: {
-                'Cookie': ''
+                'cookie': ''
             }
         };
         $.get(url, async (err, resp, data) => {
@@ -469,7 +470,8 @@ async function receiveRed(id) {
                 } else {
                     let data2 = JSON.parse(data);
                     if (data2.state == 1) {
-                        $.log(`receiveRed ` + data2.data.red_money + "元");
+                        let red_money = data2.data.red_money;
+                        $.log(`receiveRed 领到红包` + red_money + "元");
                         receiveRed_int = true;
                     } else {
                         $.log(`receiveRed ` + data2.msg);
