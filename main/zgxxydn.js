@@ -5,17 +5,17 @@
 ============Quantumultx===============
 [task_local]
 #这个修仙有点难
-00 00 19,20,21,22,23,00 * * * , tag=这个修仙有点难, img-url=, enabled=true
+00 00,30 19,20,21,22,23,00 * * * , tag=这个修仙有点难, img-url=, enabled=true
 
 ================Loon==============
 [Script]
-cron "00 00 19,20,21,22,23,00 * * *" script-path=,tag=这个修仙有点难
+cron "00 00,30 19,20,21,22,23,00 * * *" script-path=,tag=这个修仙有点难
 
 ===============Surge=================
-这个修仙有点难 = type=cron,cronexp="00 00 19,20,21,22,23,00 * * *",wake-system=1,timeout=33600,script-path=
+这个修仙有点难 = type=cron,cronexp="00 00,30 19,20,21,22,23,00 * * *",wake-system=1,timeout=33600,script-path=
 
 ============小火箭=========
-这个修仙有点难 = type=cron,script-path=, cronexpr="00 00 19,20,21,22,23,00 * * *", timeout=33600, enable=true
+这个修仙有点难 = type=cron,script-path=, cronexpr="00 00,30 19,20,21,22,23,00 * * *", timeout=33600, enable=true
 */
 
 const $ = new Env('这个修仙有点难');
@@ -25,7 +25,7 @@ var appUrlArr = [];
 const md5key = "HGJL8-EDH5F-WS1JP-TFGJI";
 var username = '';
 var password = '';
-var role_id = '345341140402400';
+var role_id = '';
 var uuid = '';
 var user_id = '';
 var sdk_token = '';
@@ -89,7 +89,7 @@ async function getEnvParam(userNum) {
         appUrlArrVal = appUrlArrVal.split("----");
         username = appUrlArrVal[0];
         password = appUrlArrVal[1];
-        //role_id = appUrlArrVal[2];
+        role_id = appUrlArrVal[2];
     }
 }
 
