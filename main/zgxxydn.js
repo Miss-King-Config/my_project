@@ -419,7 +419,7 @@ async function getEntry() {
 async function getIndex() {
     return new Promise((resolve) => {
         let url = {
-            url: `https://xmr.shqnon.com/hd/?ct=TuiRedInteract&ac=getIndex&game_id=331&game_pkg=yjsydlw_pxzgxxydn_CK&role_id=${role_id}&uid=${user_id}&config_id=${config_id}&sign=${sign}`,
+            url: `https://xmr.shqnon.com/hd/?ct=TuiRedInteract&ac=getIndex&game_id=331&game_pkg=yjsydlw_pxzgxxydn_CK&role_id=${role_id}&uid=${user_id}&config_id=${config_id}&sign=${sign}&sdk_token=${sdk_token}`,
             headers: {
                 'cookie': ''
             }
@@ -458,7 +458,7 @@ async function getIndex() {
 async function receiveRed(id) {
     return new Promise((resolve) => {
         let url = {
-            url: `https://xmr.shqnon.com/hd/?ct=TuiRedInteract&ac=receiveRed&game_id=331&game_pkg=yjsydlw_pxzgxxydn_CK&role_id=${role_id}&uid=${user_id}&config_id=${config_id}&sign=${sign}&red_id=${id}&role_name=${encodeURIComponent(role_name)}&word_desc=${word_desc}`,
+            url: `https://xmr.shqnon.com/hd/?ct=TuiRedInteract&ac=receiveRed&game_id=331&game_pkg=yjsydlw_pxzgxxydn_CK&role_id=${role_id}&uid=${user_id}&config_id=${config_id}&sign=${sign}&red_id=${id}&role_name=${encodeURIComponent(role_name)}&word_desc=${word_desc}&sdk_token=${sdk_token}`,
             headers: {
                 'cookie': ''
             }
