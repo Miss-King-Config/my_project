@@ -5,17 +5,17 @@
 ============Quantumultx===============
 [task_local]
 #滴滴果园
-00 30 8,12,18 * * * , tag=滴滴果园, img-url=, enabled=true
+00 01 8,12,18 * * * , tag=滴滴果园, img-url=, enabled=true
 
 ================Loon==============
 [Script]
-cron "00 30 8,12,18 * * *" script-path=,tag=滴滴果园
+cron "00 01 8,12,18 * * *" script-path=,tag=滴滴果园
 
 ===============Surge=================
-滴滴果园 = type=cron,cronexp="00 30 8,12,18 * * *",wake-system=1,timeout=33600,script-path=
+滴滴果园 = type=cron,cronexp="00 01 8,12,18 * * *",wake-system=1,timeout=33600,script-path=
 
 ============小火箭=========
-滴滴果园 = type=cron,script-path=, cronexpr="00 30 8,12,18 * * *", timeout=33600, enable=true
+滴滴果园 = type=cron,script-path=, cronexpr="00 01 8,12,18 * * *", timeout=33600, enable=true
 */
 
 const $ = new Env('滴滴果园');
