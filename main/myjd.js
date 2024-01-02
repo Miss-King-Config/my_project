@@ -73,8 +73,9 @@ async function initAccountInfo() {
     for (numUser = 0; numUser < totalUser; numUser++) {
         $.log(`\n用户` + (numUser + 1) + `开始执行`);
         await getEnvParam(numUser);
-        await sign_component_page("206344479832606");
+        await sign_component_page("252389899500901");
         await $.wait(5000); //等待5秒
+        //1积分转好礼 2次
         await hdtool_index("206347762920931");
         await $.wait(5000); //等待5秒
         await hdtool_index("206347762920931");
@@ -120,6 +121,8 @@ async function sign_component_page(signOperatingId) {
                     let key = htmlx2.substring(htmlx2.indexOf("var key = '") + 11);
                     key = key.substring(0, key.indexOf("';"));
                     await getToken(key, signOperatingId);
+                    await $.wait(5000); //等待5秒
+                    await sign_component_index(key, signOperatingId);
                 }
             } catch (e) {
                 $.logErr(e, resp);
@@ -227,6 +230,151 @@ async function sign_component_signResult(orderNum, signOperatingId) {
                         $.log(`签到结果 获得` + credits + `积分`);
                     } else {
                         $.log(`签到结果` + data2.desc);
+                    }
+                }
+            } catch (e) {
+                $.logErr(e, resp);
+            } finally {
+                resolve();
+            }
+        });
+    });
+}
+
+//查询抽奖机会
+async function sign_component_index(key, signOperatingId) {
+    let timestamp = Date.now();
+    return new Promise((resolve) => {
+        let url = {
+            url: `https://myjd.activity-13.m.duiba.com.cn/sign/component/index?signOperatingId=${signOperatingId}&preview=false&_=${timestamp}`,
+            headers: {
+                "Referer": `https://myjd.activity-13.m.duiba.com.cn/sign/component/page?signOperatingId=${signOperatingId}`,
+                "Cookie": `${Cookie}`
+            }
+        };
+        $.get(url, async (err, resp, data) => {
+            try {
+                if (err) {
+                    $.log(`查询抽奖机会Api请求失败`);
+                } else {
+                    let data2 = JSON.parse(data);
+                    if (data2.success) {
+                        var times = data2.data.times;
+                        $.log(`查询抽奖机会 共有` + times + `抽奖机会`);
+                        if (times > 0) {
+                            await $.wait(5000); //等待5秒
+                            await getToken2(key, signOperatingId);
+                        }
+                    } else {
+                        $.log(`查询抽奖机会` + data2.desc);
+                    }
+                }
+            } catch (e) {
+                $.logErr(e, resp);
+            } finally {
+                resolve();
+            }
+        });
+    });
+}
+
+//获取getToken2
+async function getToken2(key, signOperatingId) {
+    let timestamp = Date.now();
+    return new Promise((resolve) => {
+        let url = {
+            url: `https://myjd.activity-13.m.duiba.com.cn/chw/ctoken/getToken`,
+            body: `timestamp=${timestamp}`,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                "Referer": `https://myjd.activity-13.m.duiba.com.cn/sign/component/page?signOperatingId=${signOperatingId}`,
+                "Cookie": `${Cookie}`
+            }
+        };
+        $.post(url, async (err, resp, data) => {
+            try {
+                if (err) {
+                    $.log(`获取getToken2 Api请求失败`);
+                } else {
+                    let data2 = JSON.parse(data);
+                    if (data2.success) {
+                        var window = {};
+                        eval(data2.token);
+                        let token = window[key];
+                        $.log("获取getToken2成功");
+                        await sign_component_doJoin(token, signOperatingId);
+                    } else {
+                        $.log(`获取getToken2错误`);
+                    }
+                }
+            } catch (e) {
+                $.logErr(e, resp);
+            } finally {
+                resolve();
+            }
+        });
+    });
+}
+
+//开始抽奖
+async function sign_component_doJoin(token, signOperatingId) {
+    let timestamp = Date.now();
+    return new Promise((resolve) => {
+        let url = {
+            url: `https://myjd.activity-13.m.duiba.com.cn/sign/component/doJoin?_=${timestamp}`,
+            body: `signOperatingId=${signOperatingId}&token=${token}`,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                "Referer": `https://myjd.activity-13.m.duiba.com.cn/sign/component/page?signOperatingId=${signOperatingId}`,
+                "Cookie": `${Cookie}`
+            }
+        };
+        $.post(url, async (err, resp, data) => {
+            try {
+                if (err) {
+                    $.log(`开始抽奖Api请求失败`);
+                } else {
+                    let data2 = JSON.parse(data);
+                    if (data2.success) {
+                        $.log(`开始抽奖成功`);
+                        let orderNum = data2.data.orderNum;
+                        await $.wait(5000); //等待5秒
+                        await getOrderStatus(orderNum, signOperatingId);
+                    } else {
+                        $.log(`开始抽奖` + data2.desc);
+                    }
+                }
+            } catch (e) {
+                $.logErr(e, resp);
+            } finally {
+                resolve();
+            }
+        });
+    });
+}
+
+//抽奖结果
+async function getOrderStatus(orderNum, signOperatingId) {
+    let timestamp = Date.now();
+    return new Promise((resolve) => {
+        let url = {
+            url: `https://myjd.activity-13.m.duiba.com.cn/plugin/getOrderStatus?orderId=${orderNum}&_=${timestamp}`,
+            headers: {
+                "Referer": `https://myjd.activity-13.m.duiba.com.cn/sign/component/page?signOperatingId=${signOperatingId}`,
+                "Cookie": `${Cookie}`
+            }
+        };
+        $.get(url, async (err, resp, data) => {
+            try {
+                if (err) {
+                    $.log(`抽奖结果Api请求失败`);
+                } else {
+                    let data2 = JSON.parse(data);
+                    if (data2.success) {
+                        var type = data2.lottery.type;
+                        $.log(`抽奖结果 ` + type);
+                    } else {
+                        $.log(`抽奖结果` + data2.desc);
                     }
                 }
             } catch (e) {
