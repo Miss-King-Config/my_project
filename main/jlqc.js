@@ -1,3 +1,4 @@
+
 /*
 吉利汽车app 签到
 
@@ -5,17 +6,17 @@
 ============Quantumultx===============
 [task_local]
 #吉利汽车
-00 00 13,15 * * ** * * , tag=吉利汽车, img-url=, enabled=true
+00 00 13,15 * * * , tag=吉利汽车, img-url=, enabled=true
 
 ================Loon==============
 [Script]
-cron "00 00 13,15 * * ** * *" script-path=,tag=吉利汽车
+cron "00 00 13,15 * * *" script-path=,tag=吉利汽车
 
 ===============Surge=================
-吉利汽车 = type=cron,cronexp="00 00 13,15 * * ** * *",wake-system=1,timeout=33600,script-path=
+吉利汽车 = type=cron,cronexp="00 00 13,15 * * *",wake-system=1,timeout=33600,script-path=
 
 ============小火箭=========
-吉利汽车 = type=cron,script-path=, cronexpr="00 00 13,15 * * ** * *", timeout=33600, enable=true
+吉利汽车 = type=cron,script-path=, cronexpr="00 00 13,15 * * *", timeout=33600, enable=true
 */
 
 const $ = new Env('吉利汽车');
