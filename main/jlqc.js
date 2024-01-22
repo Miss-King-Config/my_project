@@ -1,4 +1,3 @@
-
 /*
 吉利汽车app 签到
 
@@ -75,6 +74,8 @@ async function initAccountInfo() {
         $.log(`\n用户` + (numUser + 1) + `开始执行`);
         await getEnvParam(numUser);
         await close_currentTime();
+        await $.wait(5000); //等待5秒
+        await point_available();
         await $.wait(5000); //等待5秒
     }
 }
@@ -170,6 +171,37 @@ async function userSign_sign(ts) {
                         $.log("签到成功");
                     } else {
                         $.log("签到 " + html.message);
+                    }
+                }
+            } catch (e) {
+                $.logErr(e, resp);
+            } finally {
+                resolve();
+            }
+        });
+    });
+}
+
+//查询吉分
+async function point_available() {
+    return new Promise((resolve) => {
+        let url = {
+            url: `https://app.geely.com/api/v1/point/available`,
+            headers: {
+                "token": `${token}`
+            }
+        };
+        $.get(url, async (err, resp, data) => {
+            try {
+                if (err) {
+                    $.log(`查询吉分 Api请求失败`);
+                } else {
+                    let html = JSON.parse(data);
+                    if (html.code == "success") {
+                        var availablePoint = html.data.availablePoint;
+                        $.log("查询吉分 总" + availablePoint + "吉分");
+                    } else {
+                        $.log("查询吉分 " + html.message);
                     }
                 }
             } catch (e) {
