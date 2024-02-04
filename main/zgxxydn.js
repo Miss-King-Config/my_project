@@ -181,7 +181,7 @@ async function Host() {
 //登录
 async function user_login() {
     uuid = await Imei();
-    host = await host();
+    host = await Host();
     var user_login_data = {
         ad_code: "pxzgxxydn_11194_63733_2477_222_1436954_ad",
         device: "1",
