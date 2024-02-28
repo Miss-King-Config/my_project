@@ -196,7 +196,7 @@ async function SignInfo() {
                         let KMoney = html.Data.KMoney;
                         let ActivityID = html.Data.ActivityID;
                         let SilkBagID = html.Data.SilkBag.SilkBagID;
-                        let EnumSilkBagStatus = html2.Data.SilkBag.EnumSilkBagStatus;
+                        let EnumSilkBagStatus = html.Data.SilkBag.EnumSilkBagStatus;
                         if (IsSign) {
                             $.log(`签到成功 获得${SignPrize}K币`);
                         } else {
