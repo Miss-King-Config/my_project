@@ -88,8 +88,8 @@ async function initAccountInfo() {
         await $.wait(2000); //等待2秒
         await sign_component_page("164511358962376");
         await $.wait(2000); //等待2秒
-        await superSurprise_index();
-        await $.wait(2000); //等待2秒
+        //await superSurprise_index();
+        //await $.wait(2000); //等待2秒
         await ctool_getCredits("164511358962376");
         await $.wait(2000); //等待2秒
     }
