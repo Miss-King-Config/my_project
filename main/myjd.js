@@ -76,9 +76,9 @@ async function initAccountInfo() {
         await sign_component_page("252389899500901");
         await $.wait(5000); //等待5秒
         //1积分转好礼 2次
-        /*await hdtool_index("206347762920931");
+        await hdtool_index("206347762920931");
         await $.wait(5000); //等待5秒
-        await hdtool_index("206347762920931");*/
+        await hdtool_index("206347762920931");
         await $.wait(5000); //等待5秒
         await ctool_getCredits("252389899500901");
     }
