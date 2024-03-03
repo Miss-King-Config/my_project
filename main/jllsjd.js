@@ -590,7 +590,8 @@ async function ctool_getCredits(signOperatingId) {
                     let data2 = JSON.parse(data);
                     if (data2.success) {
                         let credits = data2.data.credits;
-                        $.log(`查询积分 总${credits}积分`);
+                        let consumerCredits = data2.data.consumerCredits;
+                        $.log(`查询积分 总${credits}积分 可用${consumerCredits}积分`);
                     } else {
                         $.log(`查询积分${data2.desc}`);
                     }
