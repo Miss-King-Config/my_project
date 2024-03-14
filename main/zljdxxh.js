@@ -107,8 +107,8 @@ async function signInRecord() {
                 } else {
                     let html = JSON.parse(data);
                     if (html.code == 200) {
-                        let signRewordList = html.result.signRewordList;
-                        if (signRewordList[0].point == signRewordList[1].point) {
+                        let signInNumText = html.result.signInNumText;
+                        if (signInNumText == 9) {
                             $.log(`检测签到 积分变换间隔1天签到`);
                         } else {
                             await $.wait(1000); //等待1秒
