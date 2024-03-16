@@ -202,11 +202,15 @@ async function applet_list() {
                             let taskCode = resData[i].taskCode;
                             let channel = resData[i].channel;
                             let recordStatus = resData[i].recordStatus;
-                            if (recordStatus == "") {
-                                await $.wait(1000); //等待1秒
-                                await applet_rewardTrigger(taskName, taskCode, channel);
+                            if (taskName != "凤悦酒店订房") {
+                                if (recordStatus == "") {
+                                    await $.wait(1000); //等待1秒
+                                    await applet_rewardTrigger(taskName, taskCode, channel);
+                                } else {
+                                    $.log(`查询任务 ${taskName} 今日已完成`);
+                                }
                             } else {
-                                $.log(`查询任务 ${taskName} 今日已完成`);
+                                $.log(`查询任务 ${taskName} 无法完成`);
                             }
                         }
                     } else {
