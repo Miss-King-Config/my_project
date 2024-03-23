@@ -680,7 +680,7 @@ async function plant_newWatering() {
                         var tree_progress = data2.data.tree_progress;
                         $.log(`浇水 成功 进度${tree_progress}%`);
                         await $.wait(2000); //等待2秒
-                        await plant_newWatering;
+                        await plant_newWatering();
                     } else {
                         $.log(`浇水` + data2.errmsg);
                     }
