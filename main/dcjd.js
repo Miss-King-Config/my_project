@@ -201,6 +201,9 @@ async function group_list() {
                                     await prize_get(taskGroupName, ukey);
                                 } else if (status == 3) {
                                     $.log(`查询签到任务 ${taskGroupName} 已完成任务`);
+                                } else if (status == 5) {
+                                    await $.wait(1000); //等待1秒
+                                    await group_get(taskGroupCode);
                                 }
                                 for (let j in subTaskList) {
                                     let name = subTaskList[j].name;
