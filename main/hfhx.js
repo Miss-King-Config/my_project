@@ -385,7 +385,7 @@ async function pointstask_query() {
                                 if (taskMark == "VISIT_INSURANCE") {
                                     //每月浏览保险频道
                                     await $.wait(1000); //等待1秒
-                                    await tracebehaviorlog_addtrace();
+                                    await tracebehaviorlog_addtrace2();
                                 } else if (taskMark == "ADD_SAVE_MONEY_PLANS") {
                                     //每周建立存钱计划
                                     await $.wait(1000); //等待1秒
@@ -482,7 +482,7 @@ async function collect_v2(pointTaskName, pointTaskId) {
 }
 
 //每月浏览保险频道
-async function tracebehaviorlog_addtrace() {
+async function tracebehaviorlog_addtrace2() {
     return new Promise((resolve) => {
         let url = {
             url: `https://mw.prod.app.hsbcfts.com.cn/api/sapp/biz/tracebehaviorlog/addtrace`,
