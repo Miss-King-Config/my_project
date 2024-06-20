@@ -91,14 +91,14 @@ async function initAccountInfo() {
         await $.wait(1000); //等待1秒
         await miniAppAutoLogin();
         await $.wait(1000); //等待1秒
-        await sign_component_page("252389899500901");
+        await sign_component_page("266950778960342");
         await $.wait(2000); //等待2秒
         //1积分转好礼 2次
         await hdtool_index("206347762920931");
         await $.wait(2000); //等待2秒
         await hdtool_index("206347762920931");
         await $.wait(2000); //等待2秒
-        await ctool_getCredits("252389899500901");
+        await ctool_getCredits("266950778960342");
     }
 }
 
